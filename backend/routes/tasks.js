@@ -1,31 +1,27 @@
-const express = require('express');
+const express = require('express')
+const {
+  getTasks, 
+  getSingleTask, 
+  createTask, 
+  deleteTask, 
+  updateTask
+} = require('../controllers/taskController')
 
-const Task = require('../models/TaskModel');
+const router = express.Router()
 
-// creates an instance of the router
-const router = express.Router();
+// GET all workouts
+router.get('/', getTasks)
 
+// GET a single workout
+router.get('/:id', getSingleTask)
 
+// POST a new workout
+router.post('/', createTask)
 
-const databaseRoutes = require('../controllers/taskController');
+// DELETE a workout
+router.delete('/:id', deleteTask)
 
-// HANDLER FUNCTIONS 
+// UPDATE a workout
+router.patch('/:id', updateTask)
 
-  router.get('/', databaseRoutes.getTasks);
-  
-  // GET a single task
-  router.get('/:id', databaseRoutes.getSingleTask);
-  
-  // POST a new task
-
-  router.post('/', databaseRoutes.createTask);
-  
-  // DELETE a task
-  router.delete('/:id', databaseRoutes.deleteTask);
-  
-  // UPDATE a task
-  router.patch('/:id', databaseRoutes.updateTask);
-
-
-
-module.exports = router;
+module.exports = router

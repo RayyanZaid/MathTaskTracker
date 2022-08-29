@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Home from './pages/TaskHome';
+import TaskHome from './pages/TaskHome';
 import WelcomePage from './pages/Welcome';
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           />
           <Route 
             path = "/tasks"
-            element={<Home/>}
+            element={<TaskHome/>}
           />
         </Routes>
       </div>

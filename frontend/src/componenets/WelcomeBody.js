@@ -8,7 +8,7 @@ const WelcomeBody = () => {
         
         <div className="linkToSignUp">
             <body>
-                <Link to ="/signup" className='SignUpText'>
+                <Link to ="/tasks" className='SignUpText'>
                     <h2>Sign Up</h2>
                 </Link>
             </body>
