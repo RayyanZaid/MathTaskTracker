@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+/* layout */
+
+
+:root {
+  --primary: #1aac83;
+  --error: #e7195a;
+  text-align: center;
+
+}
+body {
+  background: #f1f1f1;
+  margin: 0;
+  font-family: "Poppins";
+}
+header {
+  background: rgb(106, 190, 225);
+  
+}
+header .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+header a {
+  color: #333;
+  text-decoration: none;
+  
+}
+.pages{
+  max-width: 100vw;
+  
+  margin: 0 auto;
+}
+
+.tasks {
+  padding: 20px;
+  font-size: large;
+  color: #1827d5;
+}
+
+
+/* For the Welcome Page */
+
+.linkToSignUp {
+  padding-top: 15%;
+
+}
+
+.linkToSignUp .SignUpText{
+  color:rgb(175, 47, 47);
+  text-decoration: none;
+}
+
+
+/* For the Sign Up Page */
