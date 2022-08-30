@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const taskRoutes = require('./routes/tasks');
+const studentRoutes = require('./routes/student');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(express.json());
 // another middleware to access tasks.js
 // register the routes
 app.use('/api/tasks',taskRoutes);
+app.use('/api/student',studentRoutes);
 
 
 // connect to DB
