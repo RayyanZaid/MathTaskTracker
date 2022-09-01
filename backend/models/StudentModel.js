@@ -13,6 +13,12 @@ const StudentSchema = new Schema({
         required: true,
     },
 
+    username: {
+        type: String,
+        required: true,
+        unique: true,  
+    },
+
     email: {
         type: String,
         required: true,
@@ -27,11 +33,11 @@ const StudentSchema = new Schema({
 
 // Static SignUp method for Student Schema
 
-StudentSchema.statics.signup = async function(name, email, password) {
+StudentSchema.statics.signup = async function(name, username, email, password) {
 
     // validation
 
-    if(!name || !email || !password) {
+    if(!name || !username || !email || !password) {
         throw Error("All boxes must be filled");
     }
 
@@ -44,10 +50,10 @@ StudentSchema.statics.signup = async function(name, email, password) {
     }
 
 
-    const exists = await this.findOne({email})
+    const exists = await this.findOne({username})
 
     if(exists) {
-        throw Error("Email already exists")
+        throw Error("Username already exists. Please input a different one.")
     }
 
     /* Hashing the Password
@@ -60,11 +66,32 @@ StudentSchema.statics.signup = async function(name, email, password) {
 
     const hashedPassword = await bcrypt.hash(password,salt);
 
-    const Student = await this.create({name,email,password:hashedPassword});
+    const Student = await this.create({name,username,email,password:hashedPassword});
 
     return Student;
 }
 
+// Static method for the login page
 
+StudentSchema.statics.login = async function(username,password) {
+    if(!username || !password) {
+        throw Error("All boxes must be filled");
+    }
+
+    const findStudent = await this.findOne({username});
+
+    if(!findStudent) {
+        throw Error("Incorrect username");
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password,findStudent.password);
+
+    if(!isPasswordMatch) {
+        throw Error("Incorrect password");
+    }
+
+    return findStudent
+    
+}
 
 module.exports = mongoose.model('Student', StudentSchema);

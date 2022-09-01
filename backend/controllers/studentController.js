@@ -12,7 +12,23 @@ const createToken = (_id) => {
 // login
 
 const loginStudent = async (req,res) => {
-    res.json({message: 'Login'});
+
+    // when the user sends a post request
+    const {username,password} = req.body;
+
+    try {
+        // from the static function in the student model
+        const student = await Student.login(username,password);
+
+        // create JWT web token
+        const token = createToken(student._id)
+
+        res.status (200).json({username,token});
+    }
+
+    catch(error) {
+        res.status(400).json({error: error.message});
+    }
 }
 
 
@@ -22,16 +38,16 @@ const loginStudent = async (req,res) => {
 
 
 const signupStudent = async (req,res) => {
-    const {name,email,password} = req.body;
+    const {name,username,email,password} = req.body;
 
     try {
         // from the static function in the student model
-        const student = await Student.signup(name,email,password);
+        const student = await Student.signup(name,username,email,password);
 
         // create JWT web token
         const token = createToken(student._id)
 
-        res.status(200).json({email,token});
+        res.status(200).json({username,token});
     }
 
     catch(error) {
